@@ -64,6 +64,17 @@ def displayAll():
   data=User.query.all()
   return render_template('display.html',dataAll=data)
 
+@app.route('/login',methods=['GET'])
+def login():
+  em=request.args.get("email")
+  pa=request.args.get("password")
+  lo=User.query.filter_by(email=em,password=pa).first()
+  if not lo:
+    return "invalid email"
+  else:
+    return "valid email"
+
+
 if __name__ == "__main__":
   db.create_all()
  
